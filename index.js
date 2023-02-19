@@ -1,7 +1,7 @@
 let kitty, kittyImg;
 let asteroids;
 function preload() {
-  kittyImg = loadImage('https://cdn-icons-png.flaticon.com/128/763/763763.png');
+  kittyImg = loadImage('https://cdn-icons-png.flaticon.com/64/763/763763.png');
 }
 
 function setup() {
