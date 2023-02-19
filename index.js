@@ -1,8 +1,7 @@
-let kitty, kittyImg, spaceImg;
+let kitty, kittyImg;
 let asteroids;
 function preload() {
-  kittyImg = loadImage('/images/kitty.png');
-  //spaceImg = loadImage('/images/space.jpg');
+  kittyImg = loadImage('kitty.png');
 }
 
 function setup() {
