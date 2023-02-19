@@ -1,7 +1,8 @@
-let kitty, kittyImg;
+let kitty, kittyImg, spaceImg;
 let asteroids;
 function preload() {
-  kittyImg = loadImage('https://cdn-icons-png.flaticon.com/64/763/763763.png');
+  kittyImg = loadImage('/images/kitty.png');
+  spaceImg = loadImage('/images/space.jpg');
 }
 
 function setup() {
@@ -18,7 +19,7 @@ function setup() {
 }
 
 function draw() {
-  background(255); // fixes kitty image trail
+  background(spaceImg); // fixes kitty image trail
 
   fill(0);
   textSize(24);
