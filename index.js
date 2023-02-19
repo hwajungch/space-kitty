@@ -2,7 +2,7 @@ let kitty, kittyImg, spaceImg;
 let asteroids;
 function preload() {
   kittyImg = loadImage('/images/kitty.png');
-  spaceImg = loadImage('/images/space.jpg');
+  //spaceImg = loadImage('/images/space.jpg');
 }
 
 function setup() {
@@ -19,7 +19,7 @@ function setup() {
 }
 
 function draw() {
-  background(spaceImg); // fixes kitty image trail
+  background(color(11, 11, 70)); // fixes kitty image trail
 
   fill(0);
   textSize(24);
