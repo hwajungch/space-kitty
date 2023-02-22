@@ -1,15 +1,19 @@
-let kitty, kittyImg, asteroids, asteroidImg, survivalTime, gameOver;
+let kitty, kittyImg, asteroids, asteroidImg, survivalTime, tutorialOver;
 
 function preload() {
   kittyImg = loadImage('kitty.png');
   asteroidImg = loadImage('https://cdn-icons-png.flaticon.com/64/7480/7480279.png');
+  kitty = new Sprite(width/2, height/2); //spawns in center
+  kitty.addImage(kittyImg);
+  asteroids = new Group();
+  asteroids.addImage(asteroidImg);
 }
 
 function setup() {
   new Canvas(windowWidth, windowHeight);
   survivalTime = 0;
-  gameOver = false;
-  setupKitty();
+  setInterval(timer,1000);
+  createAsteroids();
 }
 
 function draw() {
@@ -18,59 +22,50 @@ function draw() {
   fill(255); //white
   textSize(24);
   textAlign(CENTER);
-  text('Help space kitty avoid the asteroids!', width / 2, height / 16);
+  if (tutorialOver) {
+    text('Help space kitty! You can do it!', width / 2, height / 16);
+  } else {
+    text('Move your mouse to avoid the asteroids!', width / 2, height / 16);
+  }
 
   kitty.position.x = mouseX;
   kitty.position.y = mouseY;
 
-  survivalTime = int(millis()/1000); // counts time since setup() function
+  text('Time: ' + survivalTime + ' seconds', width / 2, height*2 / 16);
 
-  for (i = 0; i < 10; i++) {
-    let ang = random(360);
-    let px = width / 2 + 1000 * cos(ang);
-    let py = height / 2 + 1000 * sin(ang);
-    createAsteroid(px, py);
+  // from p5play.org demos
+  for (let a of asteroids) {
+		if (a.x < -32) a.x = width + 32;
+		if (a.x > width + 32) a.x = -32;
+		if (a.y < -32) a.y = height + 32;
+		if (a.y > height + 32) a.y = -32;
+    a.addSpeed(0.01);
+	}
+
+  if (kitty.collides(asteroids)) {
+    endGame();
   }
-
-  asteroids.cull(0);
-  kitty.overlaps(asteroids, endGame);
 }
 
-function setupKitty() {
-  kitty = createSprite(width/2, height/2); //spawns in center
-  kitty.addImage(kittyImg);
-}
-
-function createAsteroid(px, py) {
-  asteroids = new Group();
-  //let a = createSprite(random(width), random(height), 25, 25);
-  //a.shapeColor = color(random(100, 255));
- // a.velocity.x = random(0.5,5);
- // a.velocity.y = 0.5;
-  //a.direction = random(360);
- // asteroids.add(a);
-  let a = new Sprite(px, py, 90);
-  a.direction = random(360);
-  a.speed = 2.5;
-  a.rotationSpeed = random(-1, 1);
-  a.mass = 2;
-  asteroids.add(a);
+function createAsteroids() {
+  for (let i = 0; i < 10; i++) {
+    let a = new asteroids.Sprite(random(width), height, 64);
+    a.speed = 2;
+    a.mass = 2;
+    a.rotationSpeed = random(-1, 1);
+    a.direction = random(360);
+  }
 }
 
 function endGame() {
   asteroids.remove();
-  fill(255); //white
-  textSize(24);
-  textAlign(CENTER);
-  text('Game Over! You survived ' + survivalTime + 'seconds', width / 2, height / 2);
   survivalTime = 0;
-  gameOver = true;
+  tutorialOver = true;
+  createAsteroids();
 }
 
-function mousePressed() {
-  if (gameOver) {
-    reset();
-  }
+function timer() {
+  survivalTime += 1;
 }
 
 function windowResized() {
