@@ -1,6 +1,6 @@
 # space-kitty
 2D game built using p5.js and p5.play libraries, where a kitty tries to avoid colliding with asteroids in space.
-Play the game at <a href="https://hjchoi28.github.io/space-kitty/" title="Space Kitty Game">hjchoi28.github.io/space-kitty/</a>
+Play the game at <a href="https://hwajungch.github.io/space-kitty/" title="Space Kitty Game">hwajungch.github.io/space-kitty/</a>
 
 ## image attributions
 <ul>
